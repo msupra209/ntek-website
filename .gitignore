@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Exact byte-for-byte duplicates of assets/generated/ (verified by md5).
+# The canonical copies live in assets/generated/ with PROMPTS.md alongside
+# them; these root-level copies are the original drop location and are safe
+# to delete locally.
+/assets/hero-01.png
+/assets/hero-02.png
+/assets/hero-03.png
+/assets/texture-01.png
+/assets/texture-02.png
+/assets/topographic_relief_dark.png
+
+# Local scratch
+*.log
