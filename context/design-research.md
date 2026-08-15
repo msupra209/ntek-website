@@ -86,6 +86,56 @@ cannot be substituted.
 
 ---
 
+## Finding 5 — The mark only holds on light grounds (verified 2026-08-15)
+
+The logo was rendered at two scales on five grounds and inspected before any
+option was designed — rather than reasoned about from path coordinates.
+
+| Ground | Result |
+|---|---|
+| `#FFFFFF` | Full lockup reads — ring, orbit dots, "Solutions". Clean. |
+| `#F2F1EE` bone | Same. Clean. |
+| `#091E81` brand navy | **"Solutions" disappears entirely** (navy on navy). The K's leg breaks out of the light ellipse into the field. |
+| `#050B2B` | As above, plus the ring loses definition. |
+| `#080B10` near-black | As above. |
+
+**Root cause of the first build's logo problem.** The committed-dark ground made
+the true navy unusable as ink — `#091E81` on `#080B10` is **1.42:1** against a
+4.5:1 requirement — which forced two compromises: the accent was lifted to
+`hsl(229.5 87% 62%)` = `#4A67F2`, and the mark was re-cut with all 15 navy fills
+flipped to `#FFFFFF` plus the ring to `#5E6879`. The result shipped a logo
+containing **zero brand colour**. Majid flagged both.
+
+**Rule going forward:** the mark is never recoloured. It is given a light plate
+instead. On a dark or navy page that means a bone header bar and bone footer.
+Contrast facts worth keeping:
+
+- `#091E81` on `#FFFFFF` → **13.9:1** (AAA) — usable as display ink
+- `#E6E6E6` on `#091E81` → **11.1:1** — the ring grey works as body type on navy
+- `#C1C2BD` on `#091E81` → **7.7:1** — the warm grey works as secondary type
+
+So on a navy ground the fix is not to lighten the navy; it is to make the navy
+the **ground** and let the mark's own two greys become the type. Three brand
+colours, nothing invented.
+
+---
+
+## Finding 6 — Both agreed references are light-ground (verified 2026-08-15)
+
+Visited directly rather than recalled.
+
+| Site | Ground | Structure worth taking |
+|---|---|---|
+| cuberto.com | Pure white | Centred oversized geometric grotesk, tiny sub-line, then a single full-bleed rounded dark media card. Services as prose blocks. |
+| videinfra.com | Flat warm grey ~`#CFCFCF` | Left-aligned massive grotesk, period-terminated single words. IA is **numbered expertise verticals 01–04** with project cards nested under each, then a hard proof block. Hairline rules, hamburger-only chrome. |
+
+**Caveat on Cuberto:** its signature personality — custom cursor, morphing
+shapes, expressive easing — reads as "creative studio" and works against
+Product Principle #1 (*credibility over cleverness*) for a government
+procurement audience. Structure was borrowed; personality was not.
+
+---
+
 ## Open research not yet done
 
 - **Per-site competitor audit.** `competitors.md` lists ten companies but
