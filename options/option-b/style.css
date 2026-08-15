@@ -85,6 +85,36 @@ button,input,select,textarea{font:inherit;color:inherit}
 .bar__cta:hover{background:var(--navy-deep)}
 .bar__toggle{display:none;margin-left:auto;background:none;border:0;padding:8px;cursor:pointer;color:var(--navy)}
 
+/* --------------------------------------------------------------- icons -- */
+.sprite{display:none}
+.ico{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
+
+/* ------------------------------------------------------------- imagery -- */
+/* Both source plates are dark. On the navy ground they are SCREENED, so the
+   near-black falls away entirely and only the lit contour ridges survive —
+   which is why the relief reads as navy topography rather than as a grey
+   photo pasted on top. On the bone section they are inverted and multiplied
+   instead. Two assets, four treatments, no stock and no synthetic imagery.  */
+.relief{
+  position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:url('../../assets/img/relief.jpg') right center/cover no-repeat;
+  mix-blend-mode:screen;opacity:.9;
+}
+/* The source carries a verified tonal seam at ~44% width. The mask ramp is
+   deliberately laid straight across it, and the headline sits in the clear. */
+.relief--hero{
+  -webkit-mask-image:linear-gradient(90deg,transparent 14%,rgba(0,0,0,.45) 48%,#000 88%);
+          mask-image:linear-gradient(90deg,transparent 14%,rgba(0,0,0,.45) 48%,#000 88%);
+}
+.contour{
+  position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:url('../../assets/img/contour.jpg') center/cover no-repeat;
+  mix-blend-mode:screen;opacity:.55;
+}
+.section--bone .contour{filter:invert(1) contrast(.72);mix-blend-mode:multiply;opacity:.45}
+.hero,.section,.foot{position:relative;isolation:isolate}
+.hero > .shell,.section > .shell{position:relative;z-index:1}
+
 /* ---------------------------------------------------------------- hero -- */
 .hero{padding:132px 0 96px}
 .hero h1{
@@ -125,8 +155,14 @@ button,input,select,textarea{font:inherit;color:inherit}
 }
 .line:hover{background:rgba(230,230,230,.055);padding-inline:22px}
 .line__idx{font-family:'Plex Mono',monospace;font-size:.78rem;letter-spacing:.12em;color:var(--warm)}
-.line__name{font-family:'Archivo',sans-serif;font-weight:600;font-size:clamp(1.25rem,2.1vw,1.85rem);letter-spacing:-.028em;color:#fff;transition:transform .35s var(--ease)}
+.line__name{
+  display:flex;align-items:center;gap:16px;
+  font-family:'Archivo',sans-serif;font-weight:600;font-size:clamp(1.25rem,2.1vw,1.85rem);
+  letter-spacing:-.028em;color:#fff;transition:transform .35s var(--ease);
+}
+.line__name .ico{color:var(--warm);transition:color .35s var(--ease),transform .35s var(--ease)}
 .line:hover .line__name{transform:translateX(7px)}
+.line:hover .line__name .ico{color:#fff;transform:scale(1.08)}
 .line__desc{font-size:.98rem;color:var(--warm);max-width:58ch}
 .line__tier{
   justify-self:end;text-align:right;

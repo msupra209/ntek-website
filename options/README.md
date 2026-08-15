@@ -60,6 +60,56 @@ where the map runs in navy.
 
 ---
 
+---
+
+## Imagery
+
+Only two source plates survive the credibility rules in `../context/design-research.md`:
+the **topographic relief** and the **contour texture**. The three `hero-0*.png`
+takes are the polygonal-network-globe cliché Finding 3 rejected and are not used
+by either option.
+
+Both plates are dark. Rather than regenerate them for a light ground, each is
+composited:
+
+| Layer | Ground | Treatment |
+|---|---|---|
+| `relief.jpg` | navy | `mix-blend-mode: screen` — near-black falls away, only the lit ridges survive |
+| `relief.jpg` | white plate interior | screened inside the navy plate, masked left→right |
+| `contour.jpg` | navy | screened at low opacity |
+| `contour.jpg` | white / bone | `invert` + `brightness` + `contrast`, then `multiply` |
+
+The brightness step matters: inverting alone lifts the plate's near-black ground
+to about `#EBE8E1`, which multiplies into the page as a grey haze. Pushing that
+ground back to pure white drops it out of the multiply entirely and leaves only
+the drawn lines.
+
+**The tonal seam.** `relief.jpg` carries a verified hard step at ~44% width. Both
+options lay a horizontal mask ramp straight across it rather than trying to
+crop around it, and the headline sits in the cleared area.
+
+### Weight — closes open decision #2
+
+| | Before | After |
+|---|---|---|
+| relief | 2.13MB PNG | **309KB** JPEG q84 |
+| contour | 2.90MB PNG | **257KB** JPEG q80, 1600px |
+| total | 5.03MB | **566KB** (−89%) |
+
+Checked for the banding that was the stated risk — none visible at q84, contour
+detail intact. Originals are kept in `assets/img/`. `sips` still cannot write
+WebP on this machine, so JPEG is the format.
+
+### Service marks
+
+`assets/icons/services.svg` — nine drafting-register marks on a 24×24 grid,
+1.4 stroke, no fills, `currentColor` so one sprite serves both the white and the
+navy option. Inlined per page as a hidden sprite so there is no external `<use>`
+fetch. Option A puts them at the head of each card; Option B leads each numbered
+row with one.
+
+No stock photography, no synthetic people or datacenters, no network globe.
+
 ## Content integrity — unchanged from the first build
 
 - **No invented SLA data.** `24x7x4` is published for Jordan, Lebanon and

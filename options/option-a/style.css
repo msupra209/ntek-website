@@ -94,6 +94,32 @@ button,input,select,textarea{font:inherit;color:inherit}
 .nav .btn{height:44px}
 .nav__toggle{display:none;margin-left:auto;background:none;border:0;padding:8px;cursor:pointer;color:var(--navy)}
 
+/* --------------------------------------------------------------- icons -- */
+.sprite{display:none}
+.ico{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+
+/* ------------------------------------------------------------- imagery -- */
+/* Only two source assets survive the credibility rules: the topographic
+   relief and the contour texture. Both are dark plates, so on white they are
+   inverted and multiplied — the white ground drops out and only the drawn
+   contour lines remain. No stock, no synthetic people, no network globe.   */
+.wash{position:relative;isolation:isolate}
+/* Inverting alone lifts the plate's near-black ground to ~#EBE8E1, which then
+   multiplies into the white page as a grey haze. Brightness pushes that ground
+   back to pure white so it drops out of the multiply entirely, and contrast
+   holds the drawn lines — the texture reads as survey contours, not as fog. */
+.wash::before{
+  content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:url('../../assets/img/contour.jpg') center/135% no-repeat;
+  filter:invert(1) brightness(1.16) contrast(1.5);
+  mix-blend-mode:multiply;opacity:.6;
+}
+.wash--hero::before{
+  -webkit-mask-image:radial-gradient(ellipse 86% 74% at 50% 44%,#000 0%,transparent 76%);
+          mask-image:radial-gradient(ellipse 86% 74% at 50% 44%,#000 0%,transparent 76%);
+}
+.wash--soft::before{opacity:.4}
+
 /* ---------------------------------------------------------------- hero -- */
 .hero{padding:120px 0 76px;text-align:center}
 .hero h1{
@@ -112,11 +138,21 @@ button,input,select,textarea{font:inherit;color:inherit}
   position:relative;background:var(--navy);border-radius:var(--r-lg);overflow:hidden;
   padding:58px 56px 44px;color:#fff;
 }
-.plate::after{ /* faint graticule wash, drawn not imported */
+.plate::after{ /* faint graticule, drawn not imported */
   content:'';position:absolute;inset:0;pointer-events:none;opacity:.5;
   background-image:linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),
                    linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px);
   background-size:72px 72px;
+}
+/* The relief plate, screened over the navy so its near-black falls away and
+   only the lit contour ridges survive. Masked left→right: the source has a
+   verified tonal seam at ~44% width, and the ramp spans straight over it. */
+.plate__relief{
+  position:absolute;inset:0;pointer-events:none;
+  background:url('../../assets/img/relief.jpg') right center/cover no-repeat;
+  mix-blend-mode:screen;opacity:.85;
+  -webkit-mask-image:linear-gradient(90deg,transparent 8%,rgba(0,0,0,.55) 46%,#000 82%);
+          mask-image:linear-gradient(90deg,transparent 8%,rgba(0,0,0,.55) 46%,#000 82%);
 }
 .plate__head{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-bottom:24px}
 .plate__head h2{font-size:clamp(1.7rem,3vw,2.6rem);color:#fff;max-width:16ch}
@@ -174,7 +210,9 @@ button,input,select,textarea{font:inherit;color:inherit}
 }
 .section--bone .svc{background:var(--paper)}
 .svc:hover{transform:translateY(-5px);border-color:var(--navy);box-shadow:0 18px 40px -22px rgba(9,30,129,.45)}
-.svc__idx{font-family:'Plex Mono',monospace;font-size:.7rem;letter-spacing:.12em;color:var(--ink-faint)}
+.svc__idx{position:absolute;top:26px;right:26px;font-family:'Plex Mono',monospace;font-size:.7rem;letter-spacing:.12em;color:var(--ink-faint)}
+.svc .ico{width:30px;height:30px;color:var(--navy);opacity:.92;transition:transform .4s var(--ease)}
+.svc:hover .ico{transform:translateY(-3px)}
 .svc__name{display:block;margin-top:20px;font-family:'Archivo',sans-serif;font-weight:600;font-size:1.22rem;letter-spacing:-.02em;color:var(--navy)}
 .svc__desc{display:block;margin-top:10px;font-size:.95rem;color:var(--ink-soft)}
 .svc__group{display:inline-block;margin-top:20px;padding:5px 11px;border-radius:999px;background:var(--navy-soft);color:var(--navy);font-family:'Plex Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase}
